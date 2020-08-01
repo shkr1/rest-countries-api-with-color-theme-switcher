@@ -1,0 +1,47 @@
+:root[color-mode="light"] {
+    --background: hsl(0, 0%, 98%);
+    --text-color: hsl(200, 15%, 8%);
+    --background-component: hsl(209, 23%, 22%);
+    --input-placeholder: hsl(0, 0%, 52%);
+}
+
+:root[color-mode="dark"] {
+    --background: hsl(207, 26%, 17%);
+    --text-color: hsl(0, 0%, 100%);
+    --background-component: hsl(0, 0%, 100%);
+    --input-placeholder: hsl(0, 0%, 100%);
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+    height: 100%;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 100%; /* 16px */
+    color: var(--text-color);
+    background-color: var(--background);
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 800;
+    line-height: 1.15;
+}
+
+h1 {
+    font-size: 3.052em;
+}
+
+h2 {font-size: 2.441em;}
+
+h3 {font-size: 1.953em;}
+
+h4 {font-size: 1.563em;}
+
+h5 {font-size: 1.25em;}
+
+small, .text_small {font-size: 0.8em;}
