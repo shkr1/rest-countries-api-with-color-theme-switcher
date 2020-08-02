@@ -1,14 +1,18 @@
+:root {
+    --regions-filter-width: 225px
+}
+
 :root[color-mode="light"] {
     --background: hsl(0, 0%, 98%);
     --text-color: hsl(200, 15%, 8%);
-    --background-component: hsl(209, 23%, 22%);
+    --background-component: hsl(0, 0%, 100%);
     --input-placeholder: hsl(0, 0%, 52%);
 }
 
 :root[color-mode="dark"] {
     --background: hsl(207, 26%, 17%);
     --text-color: hsl(0, 0%, 100%);
-    --background-component: hsl(0, 0%, 100%);
+    --background-component: hsl(209, 23%, 22%);
     --input-placeholder: hsl(0, 0%, 100%);
 }
 
@@ -45,3 +49,177 @@ h4 {font-size: 1.563em;}
 h5 {font-size: 1.25em;}
 
 small, .text_small {font-size: 0.8em;}
+
+img {
+    max-width: 100%;
+}
+
+.container {
+    display: grid;
+    gap: 1.5rem;
+    padding-bottom: 2rem;
+}
+
+.header {
+    padding: 2rem 1rem;
+    background-color: var(--background-component);
+    -webkit-box-shadow: 0px -1px 12px 1px rgba(0,0,0,0.17);
+    -moz-box-shadow: 0px -1px 12px 1px rgba(0,0,0,0.17);
+    box-shadow: 0px -1px 12px 1px rgba(0,0,0,0.17);
+}
+
+.header__nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__title {
+    font-size: 16px;
+}
+
+.header__switch {
+    display: flex;
+    align-items: flex-end;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.header__icon {
+    margin-right: 8px;
+    width: 20px;
+}
+
+.filters {
+    padding: 0 1rem;
+}
+
+.filters__wrapper {
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--background-component);
+    -webkit-box-shadow: -1px 0px 12px 1px rgba(0,0,0,0.11);
+    -moz-box-shadow: -1px 0px 12px 1px rgba(0,0,0,0.11);
+    box-shadow: -1px 0px 12px 1px rgba(0,0,0,0.11);
+    margin-bottom: 1rem;
+}
+
+.wrapper__image {
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+}
+
+.wrapper__image > path {
+    stroke: var(--input-placeholder) !important;
+}
+
+.wrapper__image > line {
+    stroke: var(--input-placeholder) !important;
+}
+
+.filters__search {
+    border: none;
+    width: 100%;
+}
+
+.filters__search::placeholder {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 600;
+    color: var(--input-placeholder);
+    opacity: 1;
+}
+
+.filters__regions {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    width: var(--regions-filter-width);
+    padding: 1.25rem 1.5rem;
+    border-radius: 6px;
+    background-color: var(--background-component);
+    cursor: pointer;
+    -webkit-box-shadow: -1px 0px 12px 1px rgba(0,0,0,0.11);
+    -moz-box-shadow: -1px 0px 12px 1px rgba(0,0,0,0.11);
+    box-shadow: -1px 0px 12px 1px rgba(0,0,0,0.11);
+}
+
+.filters__regions__title {
+    font-size: 15px;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 600;
+}
+
+.filters__arrow {
+    width: 20px;
+}
+
+.regions {
+    display: grid;
+    gap: 1rem;
+    position: absolute;
+    padding: 1rem;
+    width: var(--regions-filter-width);
+    border-radius: 6px;
+    background-color: var(--background-component);
+    -webkit-box-shadow: -1px 0px 12px 1px rgba(0,0,0,0.11);
+    -moz-box-shadow: -1px 0px 12px 1px rgba(0,0,0,0.11);
+    box-shadow: -1px 0px 12px 1px rgba(0,0,0,0.11);
+    cursor: pointer;
+    left: 0;
+    top: calc(60px + 5px);
+}
+
+.region {
+    font-size: 15px;
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+.countries {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(279px, 1fr));
+    padding: 0 3rem;
+}
+
+.country {
+    display: flex;
+    flex-direction: column;
+    -webkit-box-shadow: -1px 0px 12px 1px rgba(0,0,0,0.11);
+    -moz-box-shadow: -1px 0px 12px 1px rgba(0,0,0,0.11);
+    box-shadow: -1px 0px 12px 1px rgba(0,0,0,0.11);
+}
+
+.country__flag {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 6px 6px 0 0;
+}
+
+.country__properties {
+    padding: 2rem 1.5rem;
+    background-color: var(--background-component);
+    border-radius: 0 0 6px 6px;
+}
+
+.country__name {
+    font-size: 16px;
+    margin-bottom: 1rem;
+}
+
+.country__property {
+    display: flex;
+    margin-bottom: 0.5rem;
+}
+
+.property__title {
+    font-weight: 600;
+}
+
+.property__data {
+    font-weight: 300;
+    margin-left: 6px;
+}
