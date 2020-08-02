@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" color-mode="light">
+<html lang="en" data-color-mode="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,13 +9,16 @@
   <link rel="stylesheet" href="resources/css/reset.css">
   <link rel="stylesheet" href="resources/css/fonts.css">
   <link rel="stylesheet" href="resources/css/default.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
-  <div class="container">
+  <div id="app" class="container">
     <header class="header">
       <nav class="header__nav">
         <h1 class="header__title">Where in the world?</h1>
-        <p class="header__switch"><img class="header__icon" src="resources/images/moon-outline.svg" alt="Moon icon"> Dark Mode</p>
+        <button v-on:click="toggleMode" class="header__switch">
+          <svg class="header__icon" xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'><title>ionicons-v5-j</title><path d='M160,136c0-30.62,4.51-61.61,16-88C99.57,81.27,48,159.32,48,248c0,119.29,96.71,216,216,216,88.68,0,166.73-51.57,200-128-26.39,11.49-57.38,16-88,16C256.71,352,160,255.29,160,136Z' style='fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px'/></svg>
+          Dark Mode</button>
       </nav>
     </header>
     <div class="filters">
@@ -35,26 +38,55 @@
       </div>
     </div>
     <main class="countries">
-      <article class="country">
-        <img src="https://restcountries.eu/data/afg.svg" alt="Country flag for Germany" class="country__flag">
+      <article v-show="countries.length > 0" v-for="country in countries" :key="country.alpha2Code" class="country">
+        <img :src="country.flag" :alt="`Country flag for ${country.name}`" class="country__flag">
         <div class="country__properties">
-          <h3 class="country__name">Germany</h3>
+          <h3 class="country__name">{{ country.name }}</h3>
           <dl class="country__information">
             <div class="country__property">
               <dt class="property__title">Population:</dt>
-              <dd class="property__data">81,770,900</dd>
+              <dd class="property__data">{{ country.population }}</dd>
             </div>
             <div class="country__property">
               <dt class="property__title">Region:</dt>
-              <dd class="property__data">Europe</dd>
+              <dd class="property__data">{{ country.region }}</dd>
             </div>
             <div class="country__property">
               <dt class="property__title">Capital:</dt>
-              <dd class="property__data">Berlin</dd>
+              <dd class="property__data">{{ country.capital }}</dd>
             </div>
           </dl>
         </div>
       </article>
+      <section class="empty-data">
+        There's no elements to show
+      </section>
     </main>
   </div>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          countries: []
+        }
+      },
+      async mounted() {
+        let data = await window.fetch('https://restcountries.eu/rest/v2/all');
+        this.countries = await data.json();
+      },
+      methods: {
+        toggleMode() {
+          const html = document.querySelector('html');
+
+          if (html.dataset.colorMode === "light") {
+            html.dataset.colorMode = "dark";
+            return;
+          }
+
+          html.dataset.colorMode =  "light";
+        }
+      }
+    });
+  </script>
 </body>
