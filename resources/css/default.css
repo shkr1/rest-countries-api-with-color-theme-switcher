@@ -2,18 +2,23 @@
     --regions-filter-width: 225px
 }
 
-:root[color-mode="light"] {
+:root[data-color-mode="light"] {
     --background: hsl(0, 0%, 98%);
     --text-color: hsl(200, 15%, 8%);
     --background-component: hsl(0, 0%, 100%);
     --input-placeholder: hsl(0, 0%, 52%);
 }
 
-:root[color-mode="dark"] {
+:root[data-color-mode="dark"] {
     --background: hsl(207, 26%, 17%);
     --text-color: hsl(0, 0%, 100%);
     --background-component: hsl(209, 23%, 22%);
     --input-placeholder: hsl(0, 0%, 100%);
+}
+
+:root[data-color-mode="dark"] .header__icon > path {
+    fill: var(--text-color) !important;
+    stroke: var(--text-color) !important;
 }
 
 * {
@@ -81,12 +86,17 @@ img {
 .header__switch {
     display: flex;
     align-items: flex-end;
+    font-family: 'Nunito Sans', sans-serif;
     font-weight: 600;
     cursor: pointer;
+    border: none;
+    background: none;
+    color: var(--text-color);
 }
 
 .header__icon {
     margin-right: 8px;
+    height: 20px;
     width: 20px;
 }
 
@@ -124,6 +134,8 @@ img {
 .filters__search {
     border: none;
     width: 100%;
+    color: var(--input-placeholder);
+    background-color: var(--background-component);
 }
 
 .filters__search::placeholder {
@@ -183,6 +195,7 @@ img {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(279px, 1fr));
     padding: 0 3rem;
+    gap: 2rem;
 }
 
 .country {
@@ -200,6 +213,7 @@ img {
 }
 
 .country__properties {
+    height: 100%;
     padding: 2rem 1.5rem;
     background-color: var(--background-component);
     border-radius: 0 0 6px 6px;
