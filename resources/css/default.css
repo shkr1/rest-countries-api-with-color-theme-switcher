@@ -159,6 +159,10 @@ img {
     box-shadow: -1px 0px 12px 1px rgba(0,0,0,0.11);
 }
 
+.filters__regions.open > .regions {
+    display: grid;
+}
+
 .filters__regions__title {
     font-size: 15px;
     font-family: 'Nunito Sans', sans-serif;
@@ -170,7 +174,7 @@ img {
 }
 
 .regions {
-    display: grid;
+    display: none;
     gap: 1rem;
     position: absolute;
     padding: 1rem;
@@ -193,7 +197,7 @@ img {
 
 .countries {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(279px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     padding: 0 3rem;
     gap: 2rem;
 }

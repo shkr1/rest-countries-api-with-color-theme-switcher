@@ -23,17 +23,18 @@
     </header>
     <div class="filters">
       <div class="filters__wrapper">
-        <svg class="wrapper__image" xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'><title>ionicons-v5-f</title><path d='M221.09,64A157.09,157.09,0,1,0,378.18,221.09,157.1,157.1,0,0,0,221.09,64Z' style='fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:32px'/><line x1='338.29' y1='338.29' x2='448' y2='448' style='fill:none;stroke:#000;stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px'/></svg>        <input type="text" placeholder="Search for a country..." name="search" id="search" class="filters__search">
+        <svg class="wrapper__image" xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'><title>ionicons-v5-f</title><path d='M221.09,64A157.09,157.09,0,1,0,378.18,221.09,157.1,157.1,0,0,0,221.09,64Z' style='fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:32px'/><line x1='338.29' y1='338.29' x2='448' y2='448' style='fill:none;stroke:#000;stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px'/></svg>
+        <input v-on:input="search" type="text" placeholder="Search for a country..." name="search" id="search" class="filters__search">
       </div>
-      <div class="filters__regions">
+      <div ref="regions" v-on:click="toggleRegions" class="filters__regions">
         <p class="filters__regions__title">Filter by Region</p>
         <img class="filters__arrow" src="resources/images/chevron-down-outline.svg" alt="Down arrow">
         <ul class="regions">
-          <li class="region">Africa</li>
-          <li class="region">America</li>
-          <li class="region">Asia</li>
-          <li class="region">Europe</li>
-          <li class="region">Oceania</li>
+          <li v-on:click="filterByRegion('africa')" class="region">Africa</li>
+          <li v-on:click="filterByRegion('americas')" class="region">America</li>
+          <li v-on:click="filterByRegion('asia')" class="region">Asia</li>
+          <li v-on:click="filterByRegion('europe')" class="region">Europe</li>
+          <li v-on:click="filterByRegion('oceania')" class="region">Oceania</li>
         </ul>
       </div>
     </div>
@@ -58,7 +59,7 @@
           </dl>
         </div>
       </article>
-      <section class="empty-data">
+      <section v-show="countries.length === 0" class="empty-data">
         There's no elements to show
       </section>
     </main>
@@ -68,7 +69,8 @@
       el: '#app',
       data() {
         return {
-          countries: []
+          countries: [],
+          timeout: null
         }
       },
       async mounted() {
@@ -85,6 +87,40 @@
           }
 
           html.dataset.colorMode =  "light";
+        },
+        toggleRegions(el) {
+          const regions = document.querySelector('.filters__regions');
+          regions.classList.toggle("open");
+        },
+        async filterByRegion(region) {
+          let data = await window.fetch(`https://restcountries.eu/rest/v2/region/${region}`);
+          this.countries = await data.json();
+          this.$refs.regions.classList.remove('open');
+        },
+        search: function (e) {
+          if (this.timeout) {
+            clearTimeout(this.timeout);
+          }
+          this.timeout = setTimeout(() => {
+            this.searchByName(e.target.value);
+          }, 300);
+        },
+        async searchByName(searchTerm) {
+          if (!searchTerm) {
+            return;
+          }
+
+          try {
+            let data = await window.fetch(`https://restcountries.eu/rest/v2/name/${searchTerm}`);
+            if (!data.ok) {
+              this.countries = [];
+              return;
+            }
+            this.countries = await data.json();
+          } catch (err) {
+            console.error(err);
+            this.countries = [];
+          }
         }
       }
     });
