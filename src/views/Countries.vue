@@ -279,6 +279,7 @@ export default {
 
 .filters__arrow {
     width: 20px;
+    height: 100%;
 }
 
 .regions {
