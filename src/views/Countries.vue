@@ -54,11 +54,7 @@
             </div>
             <div ref="regions" v-on:click="toggleRegions" class="filters__regions">
                 <p class="filters__regions__title">Filter by Region</p>
-                <img
-                    class="filters__arrow"
-                    src="../assets/images/chevron-down-outline.svg"
-                    alt="Down arrow"
-                />
+                <svg class="filters__arrow" xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'><title>ionicons-v5-a</title><polyline points='112 184 256 328 400 184' style='fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:48px'/></svg>
                 <ul class="regions">
                     <li v-on:click="filterByRegion('africa')" class="region">Africa</li>
                     <li v-on:click="filterByRegion('americas')" class="region">America</li>
