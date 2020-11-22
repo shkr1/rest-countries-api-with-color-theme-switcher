@@ -1,6 +1,8 @@
 .DS_Store
 node_modules/
-dist/
+dist/build.js
+dist/build.js.map
+dist/chevron-down-outline.svg
 npm-debug.log
 yarn-error.log
 
